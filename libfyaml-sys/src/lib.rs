@@ -14,7 +14,7 @@
 
 #[allow(clippy::all, clippy::pedantic)]
 mod bindings {
-    use libc::FILE;
+    use libc::{iovec, FILE};
 
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }

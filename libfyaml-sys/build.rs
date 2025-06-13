@@ -47,6 +47,15 @@ fn main() {
         .blocklist_function("fy_node_vscanf")
         .blocklist_function("fy_parse_event_vcreate")
         .blocklist_function("fy_vdiag")
+        .blocklist_function("fy_parser_vlog")
+        .blocklist_function("fy_parser_vreport")
+        .blocklist_function("fy_emit_vevent")
+        .blocklist_function("fy_emit_scalar_vprintf")
+        .blocklist_function("fy_event_vreport")
+        .blocklist_function("fy_diag_token_vreport")
+        .blocklist_function("fy_diag_token_override_vreport")
+        .blocklist_function("fy_diag_event_vreport")
+        .blocklist_function("fy_diag_event_override_vreport")
         .prepend_enum_name(false)
         .generate_comments(false)
         .formatter(bindgen::Formatter::Prettyplease)
@@ -60,8 +69,10 @@ fn main() {
     let mut build = cc::Build::new();
     add_c_files(&mut build, Path::new("libfyaml/src/lib"));
     add_c_files(&mut build, Path::new("libfyaml/src/xxhash"));
+    add_c_files(&mut build, Path::new("libfyaml/src/util"));
     build.include("libfyaml/include");
     build.include("libfyaml/src/xxhash");
+    build.include("libfyaml/src/util");
     build.flag_if_supported("-Wno-type-limits");
     build.flag_if_supported("-Wno-unused-but-set-parameter");
     build.flag_if_supported("-Wno-unused-parameter");
